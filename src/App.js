@@ -68,13 +68,13 @@ class App extends Component {
 
     console.log(this.state, "this is the app.js container");
     return (
+        // {this.state.loggedIn ?
+        // : <LoginRegister doLogin={this.doLogin} doRegister={this.doRegister} />
+
+        // }
       <div className="App">
-        {this.state.loggedIn ?
         <ProductContainer/>
 
-        : <LoginRegister doLogin={this.doLogin} doRegister={this.doRegister} />
-
-        }
 
 
 

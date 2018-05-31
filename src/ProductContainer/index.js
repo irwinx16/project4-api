@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ProductList from '../ProductList'
 import AddProduct from '../AddProduct';
+import ProductInformation from '../ProductInformation';
+import EditProduct from '../EditProduct';
 
 
 class ProductContainer extends Component {
@@ -8,7 +10,10 @@ class ProductContainer extends Component {
     super();
     this.state = {
       products: [],
-      showAddWindow: false
+      showAddWindow: false,
+      showProductInformation: false,
+      productId: '',
+      showEditProduct: false
      }
   }
 
@@ -36,28 +41,55 @@ class ProductContainer extends Component {
     this.setState({showAddWindow: true});
   }
   hideAddProduct = () => {
-    this.setStare({showAddWindow: false});
+    this.setState({showAddWindow: false});
   }
-  AddNewProduct = async (product, e) => {
-    e.preventDefault();
+
+  addNewProduct = async (product) => {
+
     const productsJson = await fetch('http://localhost:9292/product', {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify(product)
     });
     const productsParsed = await productsJson.json();
+    console.log(productsParsed);
     this.setState({
       products: [...this.state.products, productsParsed.new_product]
     })
   }
 
+  showProductInformation = (e) => {
+    const id = e.currentTarget.parentNode.parentNode.id;
+    // console.log(e.currentTarget.parentNode.parentNode.id);
+      this.setState({
+        showProductInformation: true,
+        productId: id
+      });
+  }
+
+  hideProductInformation = () => {
+    this.setState({showProductInformation: false});
+  }
+
+  showEditProduct = () => {
+    const id = this.state.productId;
+    this.setState({
+      showEditProduct: true
+    })
+  }
+
   render() {
-    console.log(this.props, 'this is the products list in product container');
+    // console.log(this.props, 'this is the products list in product container');
     return (
       <div>
         <h1>This is the product list</h1>
-        <ProductList products={this.state.products} showAddProduct={this.showAddProduct}/>
-        <AddProduct addNewProduct={this.AddNewProduct} hideAddProduct={this.hideAddProduct} showAddWindow={this.state.showAddWindow}/>
+        <ProductList products={this.state.products} showAddProduct={this.showAddProduct} showProductInformation={this.showProductInformation}/>
+
+        { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct}/> :null }
+
+        { this.state.showAddWindow ? <AddProduct addNewProduct={this.addNewProduct} hideAddProduct={this.hideAddProduct}/> : null }
+        <EditProduct products={this.state.products} productId={this.state.productId} showEditProduct={this.showEditProduct} />
+
 
       </div>
     )

@@ -12,20 +12,24 @@ class ProductList extends Component {
   // }
 
   render() {
-    console.log(this.props.products,  "this is this.props.products in ProductList");
-  const productList = this.props.products.map((product, i) => {
-    return (
-      <li key={i}>
-        <b>Name:</b> {product.name}
-        <b>Price:</b> {product.price}
-        <b>Stock:</b> {product.stock}
-        <b>Total:</b> {product.total}
-      </li>
-    )
-  })
+    // console.log(this.props.products,  "this is this.props.products in ProductList");
+    const productList = this.props.products.map((product, i) => {
+      // console.log(productList, "product list")
+      return (
+        <div key={i} id={product.id}>
+        <li>
+          <b>Name:</b><span onClick={this.props.showProductInformation}> {product.name}</span>
+          <b>Price:</b> {product.price}
+          <b>Stock:</b> {product.stock ? "Yes" : "No"}
+          <b>Total:</b> {product.total}
+        </li>
+        </div>
+      )
+    })
 
     return (
       <div>
+      <button onClick={this.props.showAddProduct}>Add New Product</button>
       {productList}
 
       </div>
