@@ -62,22 +62,29 @@ class App extends Component {
         }
   }
 
-
+  doLogout = async () => {
+    const logoutJson = await fetch('http://localhost:9292/user/logout', {
+      credentials: 'include' // you MUST include in ALL ajax requests
+    })
+    const loggedOut = await logoutJson.json();
+    if (loggedOut.success) {
+      this.setState({
+        loggedIn: false,
+        showingEmployee: false
+      })
+    }
+      return loggedOut;
+  }
 
   render() {
 
     console.log(this.state, "this is the app.js container");
     return (
-        // {this.state.loggedIn ?
-        // : <LoginRegister doLogin={this.doLogin} doRegister={this.doRegister} />
-
-        // }
       <div className="App">
-        <ProductContainer/>
-
-
-
-
+        {this.state.loggedIn ? <ProductContainer doLogout={this.doLogout}/>
+        :
+        <LoginRegister doLogin={this.doLogin} doRegister={this.doRegister} />
+        }
       </div>
     );
   }

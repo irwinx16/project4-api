@@ -145,6 +145,7 @@ class ProductContainer extends Component {
     return (
       <div>
         <h1>This is the product list</h1>
+        <button onClick={this.props.doLogout}>Logout</button>
         <ProductList products={this.state.products} showAddProduct={this.showAddProduct} showProductInformation={this.showProductInformation} deleteProduct={this.deleteProduct}/>
 
         { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct}/> : null }

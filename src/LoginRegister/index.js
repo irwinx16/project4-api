@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
+import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+
 
 class LoginRegister extends Component {
   constructor() {
@@ -33,14 +35,20 @@ class LoginRegister extends Component {
   render() {
     return (
       <div>
-        <h1> This is login/-register.</h1>
+        <h1> This is login / register.</h1>
         <p><span className={this.state.register ? "current" : null} onClick={this.registration}>Register</span> • <span className={!this.state.register ? "current" : null} onClick={this.loggingIn}>Log In</span></p>
 
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInput} /> <br/>
-          <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInput} /> <br/>
-          <button>{this.state.register ? "Register" : "Login"}</button>
-        </form>
+      <Form inline onSubmit={this.handleSubmit}>
+        <FormGroup controlId="formInlineName">
+          <ControlLabel>Username</ControlLabel>{' '}
+          <FormControl type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleInput} />
+        </FormGroup>{' '}
+        <FormGroup controlId="formInlineEmail">
+          <ControlLabel>Password</ControlLabel>{' '}
+          <FormControl type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInput}  />
+        </FormGroup>{' '}
+        <Button type="submit" >{this.state.register ? "Register" : "Login"}</Button>
+      </Form>;
 
       </div>
     )
