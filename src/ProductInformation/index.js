@@ -24,7 +24,7 @@ class ProductInformation extends Component {
       // show product equal an object because it need to be a object to check properties, and as an object, now react can read the object and does not error.
       showProduct = {};
     }
-    console.log(showProduct.name);
+    console.log(showProduct.name); // this is undefined
 
 
     return(

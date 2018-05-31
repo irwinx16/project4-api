@@ -17,12 +17,12 @@ class ProductList extends Component {
       // console.log(productList, "product list")
       return (
         <div key={i} id={product.id}>
-        <li>
-          <b>Name:</b><span onClick={this.props.showProductInformation}> {product.name}</span>
-          <b>Price:</b> {product.price}
-          <b>Stock:</b> {product.stock ? "Yes" : "No"}
-          <b>Total:</b> {product.total}
-        </li>
+          <li>
+            <b>Name:</b><span onClick={this.props.showProductInformation}> {product.name}</span>
+            <b>Price:</b> {product.price}
+            <b>Stock:</b> {product.stock ? "Yes" : "No"}
+            <b>Total:</b> {product.total}
+          </li>
         </div>
       )
     })

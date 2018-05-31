@@ -85,7 +85,9 @@ class ProductContainer extends Component {
     this.setState({showEditProduct: false})
   }
 
+  //editProduct --
   editedProduct = (e) => {
+    console.log(e.currentTarget)
     const id = e.currentTarget.previousSibling.id;
     console.log(id)
     this.setState({
@@ -100,7 +102,7 @@ class ProductContainer extends Component {
         <h1>This is the product list</h1>
         <ProductList products={this.state.products} showAddProduct={this.showAddProduct} showProductInformation={this.showProductInformation}/>
 
-        { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct} editedProduct={this.state.editedProduct} /> :null }
+        { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct} editedProduct={this.state.editedProduct} /> : null }
 
         { this.state.showAddWindow ? <AddProduct addNewProduct={this.addNewProduct} hideAddProduct={this.hideAddProduct}/> : null }
         { this.state.showEditProduct ? <EditProduct products={this.state.products} productId={this.state.productId} hideEditProduct={this.hideEditProduct} editedProduct={this.editedProduct} /> : null }

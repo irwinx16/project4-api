@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './style.css';
 
 class EditProduct extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: '',
       price: '',
       total: ''
     }
+    console.log(this.props, "this.props in EditProduct in constructor")
   }
 
 
@@ -18,7 +19,7 @@ class EditProduct extends Component {
       name: name
     });
   }
-  
+
   editPrice = (e) => {
     const price = e.currentTarget.value;
     this.setState({
@@ -37,7 +38,7 @@ class EditProduct extends Component {
     e.preventDefault();
 
     // add to database
-    this.props.EditedProduct({
+    this.props.editedProduct({
       name: this.state.name,
       price: this.state.price,
       total: this.state.total
@@ -48,7 +49,9 @@ class EditProduct extends Component {
   }
 
   render() {
-    console.log(this.state, "props in EditProduct")
+    console.log(this.state, "state in EditProduct")
+    console.log(this.props, "props in EditProduct in render")
+
 
     const editCurrentProduct = this.props.products.filter(product => product.id == this.props.productId);
     let productToEdit = editCurrentProduct[0];
