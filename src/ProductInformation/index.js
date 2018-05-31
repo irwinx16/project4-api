@@ -10,7 +10,7 @@ const ProductInformation = (props) => {
 
 
   // productId we are showing is in props (this.props.product)
-  console.log(props, "props in ProductInformation")
+  // console.log(props, "props in ProductInformation")
 
   // find the product object whose id matches the id in props
   const product = props.products.find((prod) => {
@@ -21,7 +21,7 @@ const ProductInformation = (props) => {
     }
   })
 
-  console.log(product)
+  // console.log(product)
 
   return(
     <div>

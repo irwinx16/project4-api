@@ -13,7 +13,6 @@ class ProductContainer extends Component {
       showAddWindow: false,
       showProductInformation: false,
       productId: '',
-      editedProduct: '',
       showEditProduct: false
      }
   }
@@ -81,19 +80,54 @@ class ProductContainer extends Component {
       showEditProduct: true
     })
   }
-
   hideEditProduct = () => {
     this.setState({showEditProduct: false})
   }
 
   //editProduct --
-  editedProduct = (e) => {
-    console.log(e.currentTarget)
-    const id = e.currentTarget.previousSibling.id;
-    console.log(id)
-    this.setState({
-      editedProduct: this.state.editedProduct[id]
+  editProduct = async (name, price, total) => {
+
+    // find/grab the right product in the array based on this.state.productId
+    // productIndex is the index of the array in state that contains the object we want to update
+    const productIndex = this.state.products.findIndex((prod) => {
+      if (prod.id == this.state.productId) {
+        return true
+      } else {
+        return false
+      }
     })
+    //https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
+    // once the promise returned by our fetch AJAX request is resolved,
+    // we have the value which is a Response object
+    const responseObject = await fetch('http://localhost:9292/product/' + this.state.productId, {
+      // credentials: 'include',
+      method: 'PUT',
+      body: JSON.stringify({ //THIS IS PAYLOAD ON THE SERVER SIDE (similar to req.body in Express)
+        name: name,
+        price: price,
+        total: total
+      })
+    })
+    // .json returns a promise
+    // once we "await" that promise, meaning
+    // once it resolves (meaning we hav access to its value)
+    // then we have the actual JSON from the API -- THE UPDATED PRODUCT FROM DB
+    const dataJson = await responseObject.json();
+    console.log(dataJson, "dataJson in editProduct in ProductContainer ");
+
+    //update that product to have the values in prodObj
+    // (using setState)
+
+    const state = this.state
+    // update the product at productIndex with the new data
+    products: [...state.products, dataJson.updated_product]
+
+
+    this.setState(state);
+
+
+
+
   }
 
   render() {
@@ -106,7 +140,7 @@ class ProductContainer extends Component {
         { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct} /> : null }
 
         { this.state.showAddWindow ? <AddProduct addNewProduct={this.addNewProduct} hideAddProduct={this.hideAddProduct}/> : null }
-        { this.state.showEditProduct ? <EditProduct products={this.state.products} productId={this.state.productId} hideEditProduct={this.hideEditProduct} editedProduct={this.editedProduct} /> : null }
+        { this.state.showEditProduct ? <EditProduct products={this.state.products} productId={this.state.productId} hideEditProduct={this.hideEditProduct} editProduct={this.editProduct} /> : null }
 
 
       </div>

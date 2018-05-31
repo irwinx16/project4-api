@@ -12,6 +12,26 @@ class EditProduct extends Component {
     console.log(this.props, "this.props in EditProduct in constructor")
   }
 
+  componentDidMount() {
+    // find product in the array of products in props that has the same ID
+    // as     this.props.productId
+    const producToEdit = this.props.products.find((productEdit) => {
+      if (productEdit.id == this.props.productId) {
+        return true
+      } else {
+        return false
+      }
+    })
+
+    // load appropriate data into state
+    this.setState({
+      name: producToEdit.name,
+      price: producToEdit.price,
+      total: producToEdit.total
+    })
+
+
+  }
 
   editName = (e) => {
     const name = e.currentTarget.value;
@@ -38,11 +58,8 @@ class EditProduct extends Component {
     e.preventDefault();
 
     // add to database
-    this.props.editedProduct({
-      name: this.state.name,
-      price: this.state.price,
-      total: this.state.total
-    })
+    this.props.editProduct(this.state.name,this.state.price,
+      this.state.total)
 
     // close the modal
     this.props.hideEditProduct();
@@ -51,20 +68,6 @@ class EditProduct extends Component {
   render() {
     console.log(this.state, "state in EditProduct")
     console.log(this.props, "props in EditProduct in render")
-
-
-    const editCurrentProduct = this.props.products.filter(product => product.id == this.props.productId);
-    let productToEdit = editCurrentProduct[0];
-
-    //   if (!productToEdit) {
-    //     productToEdit = {};
-
-    //   this.setState({
-    //     name: `${productToEdit.name}`,
-    //     price: `${productToEdit.price}`,
-    //     total: `${productToEdit.total}`
-    //   })
-    // }
 
     return(
 
