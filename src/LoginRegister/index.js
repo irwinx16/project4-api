@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
-import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { Form, FormGroup, ControlLabel, FormControl, Button, Jumbotron } from 'react-bootstrap';
 
 
 class LoginRegister extends Component {
@@ -35,8 +35,10 @@ class LoginRegister extends Component {
   render() {
     return (
       <div>
-        <h1> This is login / register.</h1>
-        <p><span className={this.state.register ? "current" : null} onClick={this.registration}>Register</span> • <span className={!this.state.register ? "current" : null} onClick={this.loggingIn}>Log In</span></p>
+        <Jumbotron>
+          <h1>Project 4</h1>
+          <h3><span className={this.state.register ? "current" : null} onClick={this.registration}>Register</span> • <span className={!this.state.register ? "current" : null} onClick={this.loggingIn}>Log In</span></h3>
+        </Jumbotron>;
 
       <Form inline onSubmit={this.handleSubmit}>
         <FormGroup controlId="formInlineName">
@@ -47,7 +49,7 @@ class LoginRegister extends Component {
           <ControlLabel>Password</ControlLabel>{' '}
           <FormControl type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInput}  />
         </FormGroup>{' '}
-        <Button type="submit" >{this.state.register ? "Register" : "Login"}</Button>
+        <Button bsStyle="primary" type="submit" >{this.state.register ? "Register" : "Login"}</Button>
       </Form>;
 
       </div>
