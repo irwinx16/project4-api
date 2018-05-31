@@ -113,21 +113,31 @@ class ProductContainer extends Component {
     // once it resolves (meaning we hav access to its value)
     // then we have the actual JSON from the API -- THE UPDATED PRODUCT FROM DB
     const dataJson = await responseObject.json();
-    console.log(dataJson, "dataJson in editProduct in ProductContainer ");
+    // console.log(dataJson, "dataJson in editProduct in ProductContainer ");
 
     //update that product to have the values in prodObj
     // (using setState)
 
     const state = this.state
+
     // update the product at productIndex with the new data
-    products: [...state.products, dataJson.updated_product]
+    state.products[productIndex] = dataJson.updated_product;
+
+    this.setState(state)
+
+  }
+
+  deleteProduct = async (id) => {
 
 
-    this.setState(state);
-
-
-
-
+  console.log(id, ' this is id ')
+  const products = await fetch ('http://localhost:9292/product/' + id, {
+    credentials: 'include',
+    method: 'DELETE'
+    });
+    this.setState({
+    products: this.state.products.filter((product) => product.id != id)
+    });
   }
 
   render() {
@@ -135,9 +145,9 @@ class ProductContainer extends Component {
     return (
       <div>
         <h1>This is the product list</h1>
-        <ProductList products={this.state.products} showAddProduct={this.showAddProduct} showProductInformation={this.showProductInformation}/>
+        <ProductList products={this.state.products} showAddProduct={this.showAddProduct} showProductInformation={this.showProductInformation} deleteProduct={this.deleteProduct}/>
 
-        { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct} /> : null }
+        { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct}/> : null }
 
         { this.state.showAddWindow ? <AddProduct addNewProduct={this.addNewProduct} hideAddProduct={this.hideAddProduct}/> : null }
         { this.state.showEditProduct ? <EditProduct products={this.state.products} productId={this.state.productId} hideEditProduct={this.hideEditProduct} editProduct={this.editProduct} /> : null }

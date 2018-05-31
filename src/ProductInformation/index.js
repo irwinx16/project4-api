@@ -30,7 +30,7 @@ const ProductInformation = (props) => {
       <li>
         <b>Name:</b> {product.name} <br/>
         <b>Price:</b> {product.price} <br/>
-        <b>Stock:</b> {product.stock ? "Yes" : "No"} <br/>
+        <b>Stock:</b> {product.total > 0 ? "Yes" : "No"} <br/>
         <b>Total:</b> {product.total} <br/>
       </li>
       <button onClick={props.showEditProduct}>Edit Product</button>

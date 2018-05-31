@@ -20,8 +20,9 @@ class ProductList extends Component {
           <li>
             <b>Name:</b><span onClick={this.props.showProductInformation}> {product.name}</span>
             <b>Price:</b> {product.price}
-            <b>Stock:</b> {product.stock ? "Yes" : "No"}
+            <b>Stock:</b> {product.total > 0 ? "Yes" : "No"}
             <b>Total:</b> {product.total}
+            <button onClick={this.props.deleteProduct.bind(null, product.id)}>Delete Product</button>
           </li>
         </div>
       )
