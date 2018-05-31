@@ -60,24 +60,25 @@ class ProductContainer extends Component {
   }
 
   showProductInformation = (e) => {
+    // grabs id from the div containing the product we clicked on
     const id = e.currentTarget.parentNode.parentNode.id;
-    // console.log(e.currentTarget.parentNode.parentNode.id);
-      this.setState({
-        showProductInformation: true,
-        productId: id
-      });
+
+    // show product info window
+    // add productId to state so that ProductInformation will know what product it's showing info for
+    this.setState({
+      showProductInformation: true,
+      productId: id
+    });
   }
 
   hideProductInformation = () => {
     this.setState({showProductInformation: false});
   }
 
-  showEditProduct = (e) => {
-    const id = e.currentTarget.previousSibling.id;
-    console.log(id)
+  // show the product editing modal
+  showEditProduct = () => {
     this.setState({
-      showEditProduct: true,
-      productId: id
+      showEditProduct: true
     })
   }
 
@@ -102,7 +103,7 @@ class ProductContainer extends Component {
         <h1>This is the product list</h1>
         <ProductList products={this.state.products} showAddProduct={this.showAddProduct} showProductInformation={this.showProductInformation}/>
 
-        { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct} editedProduct={this.state.editedProduct} /> : null }
+        { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct} /> : null }
 
         { this.state.showAddWindow ? <AddProduct addNewProduct={this.addNewProduct} hideAddProduct={this.hideAddProduct}/> : null }
         { this.state.showEditProduct ? <EditProduct products={this.state.products} productId={this.state.productId} hideEditProduct={this.hideEditProduct} editedProduct={this.editedProduct} /> : null }

@@ -2,45 +2,40 @@ import React, { Component } from 'react';
 // import EditProduct from '../EditProduct';
 import './style.css';
 
-class ProductInformation extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //
-
-  //   }
-  // }
+//consider making this a dumb/functional component
+const ProductInformation = (props) => {
 
 
 
 
 
-  render() {
+  // productId we are showing is in props (this.props.product)
+  console.log(props, "props in ProductInformation")
 
-    const productId = this.props.products.filter(product => product.id == this.props.productId);
-    let showProduct = productId[0];
-    // if showProduct is false
-    if (!showProduct) {
-      // show product equal an object because it need to be a object to check properties, and as an object, now react can read the object and does not error.
-      showProduct = {};
+  // find the product object whose id matches the id in props
+  const product = props.products.find((prod) => {
+    if (prod.id == props.productId ){
+      return true
+    } else {
+      return false
     }
-    console.log(showProduct.name); // this is undefined
+  })
 
+  console.log(product)
 
-    return(
-      <div>
-        <h1>Product Information</h1>
-        <button onClick={this.props.hideProductInformation}>Close</button>
-        <li>
-          <b>Name:</b> {showProduct.name} <br/>
-          <b>Price:</b> {showProduct.price} <br/>
-          <b>Stock:</b> {showProduct.stock ? "Yes" : "No"} <br/>
-          <b>Total:</b> {showProduct.total} <br/>
-        </li>
-        <button onClick={this.props.showEditProduct}>Edit Product</button>
-      </div>
-      )
-  }
+  return(
+    <div>
+      <h1>Product Information</h1>
+      <button onClick={props.hideProductInformation}>Close</button>
+      <li>
+        <b>Name:</b> {product.name} <br/>
+        <b>Price:</b> {product.price} <br/>
+        <b>Stock:</b> {product.stock ? "Yes" : "No"} <br/>
+        <b>Total:</b> {product.total} <br/>
+      </li>
+      <button onClick={props.showEditProduct}>Edit Product</button>
+    </div>
+  )
 }
 
 export default ProductInformation;
