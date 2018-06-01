@@ -36,7 +36,7 @@ class LoginRegister extends Component {
     return (
       <div>
         <Jumbotron>
-          <h1>Project 4</h1>
+          <h1>Inventory</h1>
           <h3><span className={this.state.register ? "current" : null} onClick={this.registration}>Register</span> • <span className={!this.state.register ? "current" : null} onClick={this.loggingIn}>Log In</span></h3>
         </Jumbotron>
 
