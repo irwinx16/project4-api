@@ -38,7 +38,7 @@ class LoginRegister extends Component {
         <Jumbotron>
           <h1>Project 4</h1>
           <h3><span className={this.state.register ? "current" : null} onClick={this.registration}>Register</span> • <span className={!this.state.register ? "current" : null} onClick={this.loggingIn}>Log In</span></h3>
-        </Jumbotron>;
+        </Jumbotron>
 
       <Form inline onSubmit={this.handleSubmit}>
         <FormGroup controlId="formInlineName">
@@ -50,7 +50,7 @@ class LoginRegister extends Component {
           <FormControl type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleInput}  />
         </FormGroup>{' '}
         <Button bsStyle="primary" type="submit" >{this.state.register ? "Register" : "Login"}</Button>
-      </Form>;
+      </Form>
 
       </div>
     )
