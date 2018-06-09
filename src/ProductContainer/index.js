@@ -144,9 +144,7 @@ class ProductContainer extends Component {
     // console.log(this.props, 'this is the products list in product container');
     return (
       <div>
-        <h1>Inventory</h1>
-        <button onClick={this.props.doLogout}>Logout</button>
-        <ProductList products={this.state.products} showAddProduct={this.showAddProduct} showProductInformation={this.showProductInformation} deleteProduct={this.deleteProduct}/>
+        <ProductList products={this.state.products} showAddProduct={this.showAddProduct} showProductInformation={this.showProductInformation} deleteProduct={this.deleteProduct} logout={this.props.doLogout}/>
 
         { this.state.showProductInformation ? <ProductInformation products={this.state.products} hideProductInformation={this.hideProductInformation} productId={this.state.productId} showEditProduct={this.showEditProduct}/> : null }
 

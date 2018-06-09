@@ -1,5 +1,9 @@
 import React, {Component } from 'react';
 import './style.css';
+import { Navbar,
+         Nav,
+         NavItem,
+       } from 'react-bootstrap';
 
 
 class ProductList extends Component {
@@ -30,7 +34,30 @@ class ProductList extends Component {
 
     return (
       <div>
-      <button onClick={this.props.showAddProduct}>Add New Product</button>
+        <Navbar inverse collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#brand">Inventory Tracker</a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <NavItem onClick={this.props.showAddProduct} href="#">
+                Add a New Product
+              </NavItem>
+              <NavItem eventKey={2} disable>
+                Out of Stock
+              </NavItem>
+            </Nav>
+            <Nav pullRight>
+              <NavItem onClick={this.props.logout} href="#">
+                Logout
+              </NavItem>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+ 
       {productList}
 
       </div>
